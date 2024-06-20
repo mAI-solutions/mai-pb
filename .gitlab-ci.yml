@@ -19,7 +19,7 @@
 image: alpine
 
 before_script:
-  - which ssh-agent || ( apt-get install -qq openssh-client )
+  - apk add --update --no-cache openssh
   - tmpfile="$(mktemp)"
   - printf '%s' "$SSH_PRIVATE_KEY" > "$tmpfile"
   - eval "$(ssh-agent -s)"
