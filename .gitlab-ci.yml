@@ -17,9 +17,12 @@
 # https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Getting-Started.gitlab-ci.yml
 
 before_script:
-  - 'which ssh-agent || ( apt-get install -qq openssh-client )'
-  - eval $(ssh-agent -s)
-  - ssh-add "$SSH_PRIVATE_KEY"
+  - which ssh-agent || ( apt-get install -qq openssh-client )
+  - tmpfile="$(mktemp)"
+  - printf '%s' "$SSH_PRIVATE_KEY" > "$tmpfile"
+  - eval "$(ssh-agent -s)"
+  - ssh-add <"$tmpfile"
+  - rm "$tmpfile"
 
 stages:          # List of stages for jobs, and their order of execution
   - build
