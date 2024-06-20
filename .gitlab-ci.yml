@@ -52,5 +52,5 @@ deploy-job:      # This job runs in the deploy stage.
   environment: production
   script:
     - echo "Deploying application..."
-    - ssh "SSH_HOSTNAME@$SSH_HOST" "cd ~ && echo ho>superlog"
+    - ssh "$SSH_HOSTNAME@$SSH_HOST" "cd ~ && echo ho>superlog"
     - echo "Application successfully deployed."
