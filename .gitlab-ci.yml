@@ -16,12 +16,14 @@
 # This specific template is located at:
 # https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Getting-Started.gitlab-ci.yml
 
+image: alpine
+
 before_script:
   - which ssh-agent || ( apt-get install -qq openssh-client )
   - tmpfile="$(mktemp)"
   - printf '%s' "$SSH_PRIVATE_KEY" > "$tmpfile"
   - eval "$(ssh-agent -s)"
-  - ssh-add <"$tmpfile"
+  - ssh-add -v <"$tmpfile"
   - rm "$tmpfile"
 
 stages:          # List of stages for jobs, and their order of execution
