@@ -23,6 +23,7 @@ before_script:
   - tmpfile="$(mktemp)"
   - printf '%s' "$SSH_PRIVATE_KEY" > "$tmpfile"
   - printf '%s' "$SSH_PRIVATE_KEY"
+  - cat "$tmpfile"
   - eval "$(ssh-agent -s)"
   - ssh-add -v <"$tmpfile"
   - rm "$tmpfile"
