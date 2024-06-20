@@ -28,7 +28,7 @@ before_script:
   - ssh-add -v "$tmpfile"
   - rm "$tmpfile"
   - mkdir -p ~/.ssh
-  - ssh-keyscan -H "$SSH_HOST" >>>> ~/.ssh/known_hosts
+  - ssh-keyscan -H "$SSH_HOST" >> ~/.ssh/known_hosts
 
 stages:          # List of stages for jobs, and their order of execution
   - build
