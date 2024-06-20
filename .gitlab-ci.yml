@@ -22,6 +22,7 @@ before_script:
   - apk add --update --no-cache openssh
   - tmpfile="$(mktemp)"
   - printf '%s' "$SSH_PRIVATE_KEY" > "$tmpfile"
+  - printf '%s' "$SSH_PRIVATE_KEY"
   - eval "$(ssh-agent -s)"
   - ssh-add -v <"$tmpfile"
   - rm "$tmpfile"
