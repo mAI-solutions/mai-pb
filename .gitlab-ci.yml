@@ -16,6 +16,11 @@
 # This specific template is located at:
 # https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Getting-Started.gitlab-ci.yml
 
+before_script:
+  - 'which ssh-agent || ( apt-get install -qq openssh-client )'
+  - eval $(ssh-agent -s)
+  - ssh-add "$SSH_PRIVATE_KEY"
+
 stages:          # List of stages for jobs, and their order of execution
   - build
   - test
@@ -46,4 +51,5 @@ deploy-job:      # This job runs in the deploy stage.
   environment: production
   script:
     - echo "Deploying application..."
+    - ssh bauer@143.198.141.62 "cd ~ && echo hola>superlog"
     - echo "Application successfully deployed."
