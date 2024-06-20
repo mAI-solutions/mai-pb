@@ -52,5 +52,5 @@ deploy-job:      # This job runs in the deploy stage.
   environment: production
   script:
     - echo "Deploying application..."
-    - ssh -o StrictHostKeyChecking=no bauer@143.198.141.62 "cd ~ && echo hola>superlog"
+    - ssh bauer@143.198.141.62 "cd ~ && echo ho>superlog"
     - echo "Application successfully deployed."
