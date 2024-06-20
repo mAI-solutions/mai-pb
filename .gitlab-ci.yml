@@ -21,9 +21,8 @@ image: alpine
 before_script:
   - apk add --update --no-cache openssh
   - tmpfile="$(mktemp)"
-  - chmod 400 "$tmpfile"
-  - echo "$SSH_PRIVATE_KEY" > "$tmpfile"
-  - echo "$SSH_PRIVATE_KEY"
+  - chmod 600 "$tmpfile"
+  - printf '%s' "$SSH_PRIVATE_KEY" > "$tmpfile"
   - cat "$tmpfile"
   - eval "$(ssh-agent -s)"
   - ssh-add -v "$tmpfile"
