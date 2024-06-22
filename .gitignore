@@ -1,5 +1,4 @@
 pocketbase
 nohup.out
-pb-data/
+pb_data/
 pb_migrations/
-
