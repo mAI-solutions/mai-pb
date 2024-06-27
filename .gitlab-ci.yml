@@ -53,7 +53,7 @@ deploy-job:      # This job runs in the deploy stage.
   script:
     - echo "Deploying application..."
     - ssh "root@143.198.141.62" "killall pocketbase"
-    - ssh "$SSH_HOSTNAME@$SSH_HOST"
+    - ssh -f "$SSH_HOSTNAME@$SSH_HOST"
        "cd ~/mai-pb;
         git checkout main;
         git pull --force;
