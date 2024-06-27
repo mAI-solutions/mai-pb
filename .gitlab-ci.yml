@@ -52,11 +52,11 @@ deploy-job:      # This job runs in the deploy stage.
   environment: production
   script:
     - echo "Deploying application..."
-    - ssh "$SSH_HOSTNAME@$SSH_HOST"
-    - cd ~/mai-pb
-    - git checkout main
-    - git pull --force
-    - go build ./cmd/pocketbase
-    - pkill pocketbase
-    - nohup ./pocketbase serve --http 0.0.0.0:8090 &disown
+    - ssh "root@143.198.141.62" "killall pocketbase"
+    - ssh "$SSH_HOSTNAME@$SSH_HOST" "
+      cd ~/mai-pb
+      git checkout main
+      git pull --force
+      export PATH=$PATH:/usr/local/go/bin && go build ./cmd/pocketbase
+      nohup ./pocketbase serve --http 0.0.0.0:8090 &disown"
     - echo "Application successfully deployed."
