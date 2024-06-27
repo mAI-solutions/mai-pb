@@ -57,6 +57,6 @@ deploy-job:      # This job runs in the deploy stage.
        "cd ~/mai-pb;
         git checkout main;
         git pull --force;
-        export PATH=$PATH:/usr/local/go/bin && go build ./cmd/pocketbase;
-        nohup ./pocketbase serve --http 0.0.0.0:8090 &disown;"
+        export PATH=$PATH:/usr/local/go/bin && go build ./cmd/pocketbase;"
+    - ssh -f "$SSH_HOSTNAME@$SSH_HOST" "cd ~/mai-pb && ./pocketbase serve --http 0.0.0.0:8090;"
     - echo "Application successfully deployed."
