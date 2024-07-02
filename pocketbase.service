@@ -1,0 +1,13 @@
+[Unit]
+Description = pocketbase
+
+[Service]
+Type = simple
+User = damarizz
+LimitNOFILE = 4096
+Restart = always
+RestartSec = 5s
+ExecStart = /home/damarizz/mai-pb/pocketbase serve --http='dotyeison.paoloose.site:80' --https='dotyeison.paoloose.site:443'
+
+[Install]
+WantedBy = multi-user.target
