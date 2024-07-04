@@ -5,16 +5,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: sudo apt install -y openssh-client
-      - run: tempfile="$(mktemp)" && echo "tmp=$tempfile" >> "$GITHUB_ENV"
+      - run: echo "tmp=$(mktemp)" >> "$GITHUB_ENV"
       - run: chmod 600 "$tmp"
-      - run: echo "$SSH_PRIVATE_KEY" > "$tmp"
+      - run: echo "${{ vars.SSH_PRIVATE_KEY }}" > "$tmp"
       - run: cat "$tmp"
       - run: eval "$(ssh-agent -s)"
       - run: ssh-add -v "$tmp"
       - run: rm "$tmp"
       - run: mkdir -p ~/.ssh
-      - run: ssh-keyscan -H "$SSH_HOST" >> ~/.ssh/known_hosts
-      - run: ssh -f "$SSH_HOSTNAME@$SSH_HOST"
+      - run: ssh-keyscan -H "${{ vars.SSH_HOST }}" >> ~/.ssh/known_hosts
+      - run: ssh -f "${{ vars.SSH_HOSTNAME }}@${{ vars.SSH_HOST }}"
                "cd ~/mai-pb;
                git checkout main;
                git pull --force;
