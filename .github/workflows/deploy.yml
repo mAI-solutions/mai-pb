@@ -4,17 +4,12 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - run: sudo apt install -y openssh-client
+      - run: sudo apt install --upgrade -y openssh-client openssh-known-hosts openssh-server
       - run: echo "tmp=$(mktemp)" >> "$GITHUB_ENV"
       - run: chmod 600 "$tmp"
       - run: echo "${{ vars.SSH_PRIVATE_KEY }}" > "$tmp"
       - run: cat "$tmp"
-      - run: |
-               eval "$(ssh-agent -s)";
-               ssh-add -v "$tmp";
-               rm "$tmp";
-               mkdir -p ~/.ssh;
-               ssh-keyscan -H "${{ vars.SSH_HOST }}" >> ~/.ssh/known_hosts;
+      - run: eval "$(ssh-agent -s)"; ssh-add -v "$tmp"; rm "$tmp"; mkdir -p ~/.ssh; ssh-keyscan -H "${{ vars.SSH_HOST }}" >> ~/.ssh/known_hosts
       - run: ssh -f "${{ vars.SSH_HOSTNAME }}@${{ vars.SSH_HOST }}"
                "cd ~/mai-pb;
                git checkout main;
