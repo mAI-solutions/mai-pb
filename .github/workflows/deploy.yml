@@ -2,7 +2,7 @@ name: deploy gh-action
 on: [push]
 jobs:
   deploy:
-    runs-on: alpine
+    runs-on: ubuntu-latest
     steps:
       - run: apk add --update --no-cache openssh
       - run: tmpfile="$(mktemp)"
