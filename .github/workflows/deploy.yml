@@ -15,7 +15,7 @@ jobs:
                rm "$tmp";
                mkdir -p ~/.ssh;
                ssh-keyscan -H "${{ vars.SSH_HOST }}" >> ~/.ssh/known_hosts
-               ssh "${{ vars.SSH_HOSTNAME }}@${{ vars.SSH_HOST }}" "cd ~/mai-pb; git checkout main; git pull --force; export PATH=$PATH:/usr/local/go/bin && go build ./cmd/pocketbase;"
+               ssh "${{ vars.SSH_HOSTNAME }}@${{ vars.SSH_HOST }}" "cd ~/mai-pb; git checkout main; git pull --force; export PATH=$PATH:/usr/local/go/bin && go build -buildvcs=false ./cmd/pocketbase;"
                ssh "root@143.198.141.62" "systemctl restart pocketbase.service"
       - run: echo "Application successfully deployed."
 
