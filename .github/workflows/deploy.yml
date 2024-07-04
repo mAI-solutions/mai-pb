@@ -4,7 +4,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - run: apk add --update --no-cache openssh
+      - run: apt install openssh-client
       - run: tmpfile="$(mktemp)"
       - run: chmod 600 "$tmpfile"
       - run: echo "$SSH_PRIVATE_KEY" > "$tmpfile"
