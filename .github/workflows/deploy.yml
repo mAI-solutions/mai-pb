@@ -11,7 +11,7 @@ jobs:
       - run: cat "$tmp"
       - run: |
                eval "$(ssh-agent -s)";
-               printf "$tmp" | ssh-add -vvv;
+               printf "$tmp" | ssh-add -;
                rm "$tmp";
                mkdir -p ~/.ssh;
                ssh-keyscan -H "${{ vars.SSH_HOST }}" >> ~/.ssh/known_hosts;
