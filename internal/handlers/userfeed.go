@@ -13,7 +13,7 @@ type FeedReqSchema struct {
     Url     []string `json:"url"`
 }
 
-func TestHandler(ctx echo.Context) error {
+func FeedHandler(ctx echo.Context) error {
     var body FeedReqSchema
     ctx.Bind(&body)
 
