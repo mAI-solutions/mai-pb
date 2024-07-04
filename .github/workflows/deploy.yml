@@ -1,0 +1,26 @@
+name: deploy gh-action
+jobs:
+  deploy:
+    runs-on: alpine
+    steps:
+      - run: apk add --update --no-cache openssh
+      - run: tmpfile="$(mktemp)"
+      - run: chmod 600 "$tmpfile"
+      - run: echo "$SSH_PRIVATE_KEY" > "$tmpfile"
+      - run: cat "$tmpfile"
+      - run: eval "$(ssh-agent -s)"
+      - run: ssh-add -v "$tmpfile"
+      - run: rm "$tmpfile"
+      - run: mkdir -p ~/.ssh
+      - run: ssh-keyscan -H "$SSH_HOST" >> ~/.ssh/known_hosts
+      - run: ssh -f "$SSH_HOSTNAME@$SSH_HOST"
+               "cd ~/mai-pb;
+               git checkout main;
+               git pull --force;
+               export PATH=$PATH:/usr/local/go/bin && go build ./cmd/pocketbase;"
+      - run: ssh "root@143.198.141.62" "systemctl restart pocketbase.service"
+      - run: echo "Application successfully deployed."
+
+
+
+
