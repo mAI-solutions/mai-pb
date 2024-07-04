@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: sudo apt install -y openssh-client
-      - run: tmpfile="$(mktemp)"
+      - run: export tmpfile="$(mktemp)"
       - run: chmod 600 "$tmpfile"
       - run: echo "$SSH_PRIVATE_KEY" > "$tmpfile"
       - run: cat "$tmpfile"
