@@ -1,4 +1,5 @@
 name: deploy gh-action
+on: [push]
 jobs:
   deploy:
     runs-on: alpine
